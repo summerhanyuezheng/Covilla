@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .about_image {
+            display: flex;
+            height: 480px;
+            margin-left: -720px;
+            transition: all 5s;
+        }
+
+        .item {
+            flex-shrink: 0;
+            width: 480px;
+            height: 100%;
+            align-items: stretch;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="about_image">
+        <div class="item">
+            <img src="https://assets.website-files.com/60675f13ea324fdd4af9ef2a/607b6af17c67770ae3de1541_Family001.jpeg"
+                alt="">
+        </div>
+        <div class="item">
+            <img src="https://assets.website-files.com/60675f13ea324fdd4af9ef2a/607b6c801c6cc62928080d5c_Family003.jpeg"
+                alt="">
+        </div>
+        <div class="item">
+            <img src="https://assets.website-files.com/60675f13ea324fdd4af9ef2a/607b6ccb8c09f127ee426222_Family004.jpeg"
+                alt="">
+        </div>
+        <div class="item">
+            <img src="https://assets.website-files.com/60675f13ea324fdd4af9ef2a/607b6d1847737e3cad7ace73_Family005.jpeg"
+                alt="">
+        </div>
+        <div class="item">
+            <img src="https://assets.website-files.com/60675f13ea324fdd4af9ef2a/607dcd6f4c797d614a152a89_Family0012.jpeg"
+                alt="">
+        </div>
+        <div class="item">
+            <img src="https://assets.website-files.com/60675f13ea324fdd4af9ef2a/607b6e34994877bde5d7d81b_Family007.jpeg"
+                alt="">
+        </div>
+    </div>
+
+    <script>
+        const aboutBox = document.querySelector('.about_image')
+        const lastBox = document.querySelector('.about_image .item:last-child')
+        // console.log(lastBox.offsetLeft);
+        // console.log(window.innerWidth);
+        aboutBox.addEventListener('mousemove', function (e) {
+            // 鼠标在浏览器可是窗口的 x坐标
+            // console.log(e.clientX);
+            if (e.clientX <= window.innerWidth / 2) {
+                aboutBox.style.marginLeft = '-80px'
+            } else {
+                aboutBox.style.marginLeft = '-900px'
+            }
+        })
+    </script>
+</body>
+
+</html>

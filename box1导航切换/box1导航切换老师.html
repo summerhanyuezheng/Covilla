@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lookback</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .box {
+        width: 100%;
+        height: 100px;
+        background-color: rgba(231, 104, 104, 0.5);
+        position: fixed;
+        top: 0;
+        left: 0;
+      }
+
+      .content {
+        padding: 0 200px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100px;
+        position: relative;
+        z-index: 10;
+      }
+
+      button {
+        width: 150px;
+        height: 40px;
+        background: none;
+        border: 1px #fff solid;
+        color: #fff;
+      }
+
+      .ul {
+        width: 20%;
+        display: flex;
+        justify-content: space-between;
+        opacity: 0;
+      }
+
+      .back {
+        background-color: #bbdaf6;
+        height: 100px;
+        width: 100%;
+        position: absolute;
+        top: -100px;
+        left: 0;
+      }
+
+      p {
+        height: 800px;
+        border: 5px lightblue solid;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="box">
+      <div class="back"></div>
+      <div class="content">
+        <h1>COVILLE</h1>
+        <ul class="ul">
+          <li>ABOUT</li>
+          <li>ABOUT1</li>
+          <li>ABOUT2</li>
+        </ul>
+        <button>button</button>
+      </div>
+    </div>
+    <p>1223</p>
+    <p>1223</p>
+    <p>1223</p>
+    <script>
+      // 获取back
+      let back = document.querySelector(".back")
+      let ul = document.querySelector(".ul")
+      console.log(back)
+      window.onscroll = () => {
+        console.log(window.scrollY) //垂直方向滚动距离  不带单位
+        // 滚动到500px时背景完全显示
+        if (window.scrollY <= 500) {
+          back.style.top = window.scrollY / 5 - 100 + "px"
+          ul.style.opacity = window.scrollY / 5 + "%"
+        } else {
+          back.style.top = 0
+          ul.style.opacity = 1
+        }
+      }
+    </script>
+  </body>
+</html>

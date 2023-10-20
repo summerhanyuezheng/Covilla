@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .scrollArea {
+        width: 80px;
+        height: 100vh;
+        border-right: 1px rgba(192, 192, 211, 0.2) solid;
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        z-index: 1200;
+      }
+
+      .drawer {
+        height: 79px;
+        width: 100%;
+        line-height: 80px;
+        text-align: center;
+        border-bottom: 1px solid rgba(192, 192, 211, 0.2);
+        color: #081c3a;
+        font-size: 40px;
+        flex-shrink: 0;
+        /* Prevent from shrinking */
+        background-color: white;
+      }
+
+      .barBox {
+        height: 478px;
+        /* Subtracting the heights of .drawer and .social */
+        margin: 30px auto;
+        width: 4px;
+        background-color: rgba(192, 192, 211, 0.2);
+        border-radius: 2px;
+      }
+
+      .bar {
+        height: 20%;
+        width: 4px;
+        border-radius: 2px;
+        background-color: #d2d2e0;
+      }
+
+      .social {
+        height: 150px;
+        flex-shrink: 0;
+        /* Prevent from shrinking */
+      }
+
+      .social li {
+        list-style: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 1px solid rgba(192, 192, 211, 0.2);
+        background-color: rgba(174, 174, 192, 0.1);
+        margin: 15px auto;
+        display: flex;
+        /* Make it a flex container */
+        align-items: center;
+        /* Center children vertically */
+        justify-content: center;
+      }
+
+      .social li img {
+        width: 15px;
+        height: 15px;
+        object-fit: cover;
+        display: inline-block;
+        color: grey;
+      }
+
+      .box1 {
+        width: 100%;
+        height: 100vh;
+        background-image: url(https://assets.website-files.com/606764630d23c37bf9d41bb1/607dcd3355581e17e093caed_011.jpeg);
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        background-repeat: no-repeat;
+      }
+
+      .overLay {
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+
+      .container1 {
+        margin: 0 auto;
+        width: 1320px;
+      }
+
+      .middle {
+        position: relative;
+        top: 200px;
+        left: 200px;
+      }
+
+      .middle .family {
+        font-size: 11px;
+        color: #fff;
+        margin-bottom: 15px;
+        letter-spacing: 3px;
+      }
+
+      .middle .plan {
+        font-size: 68px;
+        color: #fff;
+        font-family: Poppins, sans-serif;
+        font-weight: 600;
+        width: 550px;
+        margin-bottom: 30px;
+      }
+
+      .navContact {
+        padding: 20px;
+        padding-left: 40px;
+        padding-right: 40px;
+        border-radius: 8px;
+        border-style: none;
+        color: #081c3a;
+        font-family: Inter, sans-serif;
+        background-color: #fff;
+        letter-spacing: 3px;
+        transition: 1s;
+        scale: 1;
+      }
+
+      .navtop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 80px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding-left: 200px;
+        padding-right: 200px;
+        align-items: center;
+        box-sizing: border-box;
+        background-color: transparent;
+        z-index: 10;
+      }
+
+      .back {
+        width: 100%;
+        height: 80px;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        background-color: white;
+        z-index: -1;
+      }
+
+      .navtop .covilla {
+        font-family: Eudoxussans, sans-serif;
+        font-size: 22px;
+        /* color: #081c3a; */
+        color: #fff;
+      }
+
+      .morePage {
+        width: 450px;
+        display: flex;
+        justify-content: space-evenly;
+        opacity: 0;
+      }
+
+      .morePage h2 {
+        font-family: Inter, sans-serif;
+        line-height: 20px;
+        color: #081c3a;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 3px;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+
+      .navshow {
+        width: 452px;
+        padding: 24px;
+        border-radius: 10px;
+        background-color: white;
+        /* 父相子绝，父是box1 */
+        position: absolute;
+        top: 80px;
+        right: 195px;
+        color: black;
+        list-style: none;
+        scale: 0.8;
+        transition: 1s;
+        /* opacity: 0; */
+        display: none;
+      }
+
+      .navshowItem {
+        float: left;
+        width: 218px;
+        height: 96px;
+        margin-right: 5px;
+        border: solid rgba(192, 192, 211, 0.3) 0.3px;
+        padding-left: 30px;
+        padding-top: 20px;
+        box-sizing: border-box;
+      }
+
+      .navshowItem .country {
+        font-family: Inter, sans-serif;
+        font-size: 18px;
+        line-height: 1.4em;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: #081c3a;
+        padding-bottom: 10px;
+        box-sizing: border-box;
+      }
+
+      .vaca {
+        font-size: 11px;
+        line-height: 1.4em;
+        font-weight: 400;
+        letter-spacing: 3px;
+        color: #081c3a;
+      }
+
+      .navtop button {
+        letter-spacing: 3px;
+        font-size: 11px;
+        padding: 15px;
+        padding-left: 20px;
+        padding-right: 20px;
+        background-color: transparent;
+        border: solid rgba(192, 192, 211, 0.5) 0.3px;
+        border-radius: 5px;
+        vertical-align: middle;
+        color: #fff;
+      }
+
+      .navBtn span {
+        display: inline-block;
+        font-size: 1.5em;
+        padding-left: 5px;
+        /* color: #081c3a; */
+        color: #fff;
+        padding-bottom: 7px;
+        box-sizing: border-box;
+      }
+
+      .hey {
+        height: 1000px;
+        background-color: pink;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="navtop">
+      <div class="back"></div>
+      <p class="covilla">CO<b>VILLA</b></p>
+      <div class="morePage">
+        <h2>About</h2>
+        <h2>Journal</h2>
+        <h2>support</h2>
+      </div>
+
+      <button class="navBtn">DESTINATIONS <span>&#8964;</span></button>
+
+      <ul class="navshow">
+        <li style="font-size: 12px; color: #081c3a; letter-spacing: 3px; line-height: 1.4em; font-weight: 400; margin-bottom: 20px">CHOOSE A LOCATION</li>
+        <li class="navshowItem" style="margin-right: 10px; margin-bottom: 10px">
+          <p class="country">France</p>
+          <p class="vaca">6 VACATIONS</p>
+        </li>
+        <li class="navshowItem">
+          <p class="country">Indonesia</p>
+          <p class="vaca">6 VACATIONS</p>
+        </li>
+        <li class="navshowItem" style="margin-right: 10px">
+          <p class="country">Greece</p>
+          <p class="vaca">6 VACATIONS</p>
+        </li>
+        <li class="navshowItem">
+          <p class="country">Egypt</p>
+          <p class="vaca">6 VACATIONS</p>
+        </li>
+      </ul>
+    </div>
+    <div class="scrollArea">
+      <div class="drawer">=</div>
+      <div class="barBox">
+        <div class="bar"></div>
+      </div>
+      <ul class="social">
+        <li><img src="./box1scrollicons/ins.png" alt="" /></li>
+        <li><img src="./box1scrollicons/linkIn.png" alt="" /></li>
+        <li><img src="./box1scrollicons/meta.png" lt="" /></li>
+      </ul>
+    </div>
+    <section class="box1">
+      <div class="overLay">
+        <div class="container1">
+          <div class="middle">
+            <div class="family">FAMILY TRAVEL AGENCY</div>
+            <div class="plan">Let's plan your next vacation</div>
+            <button class="navContact">CONTACT US</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="hey"></div>
+    <div class="hey"></div>
+    <div class="hey"></div>
+    <script>
+      // 获取back
+      let back = document.querySelector(".back")
+      let morePage = document.querySelector(".morePage")
+      let navtopcovilla = document.querySelector(".navtop .covilla")
+      let navBtn = document.querySelector(".navBtn")
+      console.log(back)
+      window.onscroll = () => {
+        console.log(window.scrollY) //垂直方向滚动距离  不带单位
+        // 滚动到400px时背景完全显示
+        if (window.scrollY <= 400) {
+          back.style.top = window.scrollY / 5 - 80 + "px"
+          morePage.style.opacity = window.scrollY / 5 + "%"
+          // Interpolate between white and black colors
+          const fraction = window.scrollY / 400 // This will give a value between 0 (at the top) and 1 (at 400px).
+          const r = Math.round(255 - fraction * 255)
+          const g = Math.round(255 - fraction * 255)
+          const b = Math.round(255 - fraction * 255)
+          navtopcovilla.style.color = `rgb(${r}, ${g}, ${b})`
+          navBtn.style.color = `rgb(${r}, ${g}, ${b})`
+        } else {
+          back.style.top = 0
+          morePage.style.opacity = 1
+          navtopcovilla.style.color = "#000000"
+        }
+      }
+    </script>
+  </body>
+</html>
